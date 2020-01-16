@@ -22,9 +22,9 @@ namespace ThirtyFifthExptType
         bool IsMouseDown=false;
         bool imgsave = false;
         Rectangle rect;
+        
         OpenCvSharp.Point LocationXY;
         OpenCvSharp.Point LocationX1Y1;
-        Rect v;
         Mat imgInput = new Mat();
         Mat templ1=new Mat();
         Mat result = new Mat();
@@ -38,6 +38,7 @@ namespace ThirtyFifthExptType
         int[] Pos_ty = new int[5];
         int[] Pos_tw = new int[5];
         int[] Pos_th = new int[5];
+
 
         public Form1()
         {
@@ -161,9 +162,19 @@ namespace ThirtyFifthExptType
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {}
-
         private void textBox4_TextChanged(object sender, EventArgs e)
         {}
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {}
+        private void cb_canny_CheckedChanged(object sender, EventArgs e)
+        {}
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {}
+
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -191,6 +202,7 @@ namespace ThirtyFifthExptType
                             Pos_th[var_ind] = th;
                         
                         Bitmap bmp = BitmapConverter.ToBitmap(temp);
+
                         img_disp.Image = bmp;
                         img_disp.SizeMode = PictureBoxSizeMode.StretchImage;
                     }
@@ -209,28 +221,156 @@ namespace ThirtyFifthExptType
             Mat tempa = new Mat();
             imgIn.CopyTo(imgInput);
             tempa = new Mat(imgInput, Rect_crop);
+
+            //PRE_PROCESSORS
+            Cv2.CvtColor(tempa, tempa, ColorConversionCodes.BGRA2GRAY);
+            if (comboBox1.Text == "None"||comboBox2.Text=="None")
+            {
+                   
+            }
+
+            if (cb_blur.Checked)
+            {
+                OpenCvSharp.Size aa = new OpenCvSharp.Size(3, 3);
+                Cv2.GaussianBlur(tempa, tempa, aa, 3, 3);
+            }
+            else if(comboBox1.Text=="Gaussian Blur")
+            {
+                OpenCvSharp.Size aa = new OpenCvSharp.Size(3, 3);
+                Cv2.GaussianBlur(tempa, tempa, aa, 3, 3);
+            }
+
+            if (cb_threshold.Checked)
+            {
+                Cv2.Threshold(tempa, tempa, (int)numericUpDown1.Value, 255, ThresholdTypes.Binary);
+            }
+            else if(comboBox1.Text=="Threshold")
+            {
+                Cv2.Threshold(tempa, tempa, (int)numericUpDown1.Value, 255, ThresholdTypes.Binary);
+            }
+
+            if (cb_adaptive.Checked)
+            {
+                Cv2.AdaptiveThreshold(tempa, tempa, 255, AdaptiveThresholdTypes.GaussianC, ThresholdTypes.Binary, 3, 2);
+            }
+            else if(comboBox1.Text=="Adaptive Threshold")
+            {
+                Cv2.AdaptiveThreshold(tempa, tempa, 255, AdaptiveThresholdTypes.GaussianC, ThresholdTypes.Binary, 3, 2);
+            }
+
+            if (cb_canny.Checked)
+            {
+                Cv2.Canny(tempa, tempa, (int)numericUpDown2.Value, (int)numericUpDown3.Value, 3, false);
+            }
+            else if(comboBox1.Text=="Canny")
+            {
+                Cv2.Canny(tempa, tempa, (int)numericUpDown2.Value, (int)numericUpDown3.Value, 3, false);
+            }
+
+            if (cb_erode.Checked)
+            {
+                Cv2.Erode(tempa, tempa, new Mat());
+            }
+            else if(comboBox1.Text=="Erode")
+            {
+                Cv2.Erode(tempa, tempa, new Mat());
+            }
+
+            if (cb_dilate.Checked)
+            {
+                Cv2.Dilate(tempa, tempa, new Mat());
+            }
+            else if(comboBox1.Text=="Dilate")
+            {
+                Cv2.Erode(tempa, tempa, new Mat());
+            }
             
-            Cv2.CvtColor(tempa, tempa, ColorConversionCodes.BGR2GRAY);
-            Cv2.Threshold(tempa, tempa, (int)numericUpDown1.Value, 255, ThresholdTypes.Binary);
+            if (cb_otsu.Checked)
+            {
+                Cv2.Threshold(tempa, tempa, 0, 255, ThresholdTypes.Otsu);
+            }
+            else if(comboBox1.Text=="Threshold Otsu")
+            {
+                Cv2.Threshold(tempa, tempa, 0, 255, ThresholdTypes.Otsu);
+            }
+
+            if(cb_threinvert.Checked)
+            {
+                Cv2.Threshold(tempa, tempa, (int)numericUpDown4.Value, 255, ThresholdTypes.BinaryInv);
+            }
+            else if(comboBox1.Text=="Threshold Invert")
+            {
+                Cv2.Threshold(tempa, tempa, (int)numericUpDown4.Value, 255, ThresholdTypes.BinaryInv);
+            }
+
+            //ALGORITHMS
+            if (cb_count.Checked)
+            {
+                for (int x = 0; x < tempa.Rows; x++)
+                {
+                    for (int y = 0; y < tempa.Cols; y++)
+                    {
+                        if (tempa.At<char>(x, y) == 255)
+                        {
+                            countpixel++;
+                        }
+                    }
+                }
+                textBox4.Text = countpixel.ToString();
+            }
+            else if(comboBox2.Text=="Count Pixels")
+            {
+                for (int x = 0; x < tempa.Rows; x++)
+                {
+                    for (int y = 0; y < tempa.Cols; y++)
+                    {
+                        if (tempa.At<char>(x, y) == 255)
+                        {
+                            countpixel++;
+                        }
+                    }
+                }
+                textBox4.Text = countpixel.ToString();
+            }
+
+            if (cb_contour.Checked)
+            {
+                OpenCvSharp.Point[][] first;
+                HierarchyIndex[] hi;
+                Cv2.FindContours(tempa, out first, out hi, RetrievalModes.Tree, ContourApproximationModes.ApproxSimple);
+                Cv2.CvtColor(tempa, tempa, ColorConversionCodes.GRAY2BGR);
+                for (int i = 0; i < first.Length; i++)
+                {
+                    Cv2.DrawContours(tempa, first, i, Scalar.Red, 20);
+                }
+            }
+            else if(comboBox2.Text=="Contours")
+            {
+                OpenCvSharp.Point[][] first;
+                HierarchyIndex[] hi;
+                Cv2.FindContours(tempa, out first, out hi, RetrievalModes.Tree, ContourApproximationModes.ApproxSimple);
+                Cv2.CvtColor(tempa, tempa, ColorConversionCodes.GRAY2BGR);
+                for (int i = 0; i < first.Length; i++)
+                {
+                    Cv2.DrawContours(tempa, first, i, Scalar.Red, 20);
+                }
+            }
+
+
             Cv2.NamedWindow("s", WindowMode.Normal);
             Cv2.ImShow("s", tempa);
             Bitmap bmp1 = BitmapConverter.ToBitmap(tempa);
             pictureBox2.Image = bmp1;
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
 
-           
 
-            for (int x = 0; x < tempa.Rows; x++)
-            {
-                for (int y = 0; y < tempa.Cols; y++)
-                {
-                    if (tempa.At<char>(x, y) == 255)
-                    {
-                        countpixel++; 
-                    }
-                }
-            }
-            textBox4.Text = countpixel.ToString();
+            templ1 = Cv2.ImRead(@"F:\REDBOT INNOVATIONS\Brakes img\RHS\562\69_1.bmp");
+            int result1_cols = tempa.Cols - templ1.Cols + 1;
+            int result1_rows = tempa.Rows - templ1.Rows + 1;
+            result.Create(result1_cols, result1_rows, MatType.CV_8UC1);
+            Cv2.MatchTemplate(tempa, templ1, result, TemplateMatchModes.CCoeff);
+
+
         }
     }
 }
