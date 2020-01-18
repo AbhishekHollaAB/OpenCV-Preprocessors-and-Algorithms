@@ -48,6 +48,7 @@
             this.cb_threshold = new System.Windows.Forms.CheckBox();
             this.cb_blur = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.cb_threinvert = new System.Windows.Forms.CheckBox();
             this.cb_otsu = new System.Windows.Forms.CheckBox();
@@ -60,13 +61,14 @@
             this.cb_canny = new System.Windows.Forms.CheckBox();
             this.cb_adaptive = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.cb_contour = new System.Windows.Forms.CheckBox();
             this.cb_count = new System.Windows.Forms.CheckBox();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cb_pattern = new System.Windows.Forms.CheckBox();
+            this.tb_forpattern = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -294,6 +296,25 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Pre-Processors";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.AllowDrop = true;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Threshold",
+            "Gaussian Blur",
+            "Adaptive Threshold",
+            "Canny",
+            "Erode",
+            "Dilate",
+            "Threshold Otsu",
+            "Threshold Invert",
+            "None"});
+            this.comboBox1.Location = new System.Drawing.Point(6, 19);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 41;
+            // 
             // numericUpDown4
             // 
             this.numericUpDown4.Location = new System.Drawing.Point(110, 178);
@@ -415,15 +436,30 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.tb_forpattern);
+            this.groupBox3.Controls.Add(this.cb_pattern);
             this.groupBox3.Controls.Add(this.comboBox2);
             this.groupBox3.Controls.Add(this.cb_contour);
             this.groupBox3.Controls.Add(this.cb_count);
             this.groupBox3.Location = new System.Drawing.Point(633, 259);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(163, 88);
+            this.groupBox3.Size = new System.Drawing.Size(163, 129);
             this.groupBox3.TabIndex = 39;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Algorithms";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.AllowDrop = true;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Count Pixels",
+            "Contours",
+            "None"});
+            this.comboBox2.Location = new System.Drawing.Point(3, 19);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 50;
             // 
             // cb_contour
             // 
@@ -434,6 +470,7 @@
             this.cb_contour.TabIndex = 51;
             this.cb_contour.Text = "Contour";
             this.cb_contour.UseVisualStyleBackColor = true;
+            this.cb_contour.CheckedChanged += new System.EventHandler(this.cb_contour_CheckedChanged);
             // 
             // cb_count
             // 
@@ -461,37 +498,22 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // comboBox1
+            // cb_pattern
             // 
-            this.comboBox1.AllowDrop = true;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Threshold",
-            "Gaussian Blur",
-            "Adaptive Threshold",
-            "Canny",
-            "Erode",
-            "Dilate",
-            "Threshold Otsu",
-            "Threshold Invert",
-            "None"});
-            this.comboBox1.Location = new System.Drawing.Point(6, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 41;
+            this.cb_pattern.AutoSize = true;
+            this.cb_pattern.Location = new System.Drawing.Point(6, 87);
+            this.cb_pattern.Name = "cb_pattern";
+            this.cb_pattern.Size = new System.Drawing.Size(93, 17);
+            this.cb_pattern.TabIndex = 52;
+            this.cb_pattern.Text = "Pattern Match";
+            this.cb_pattern.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // tb_forpattern
             // 
-            this.comboBox2.AllowDrop = true;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Count Pixels",
-            "Contours",
-            "None"});
-            this.comboBox2.Location = new System.Drawing.Point(3, 19);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 50;
+            this.tb_forpattern.Location = new System.Drawing.Point(57, 104);
+            this.tb_forpattern.Name = "tb_forpattern";
+            this.tb_forpattern.Size = new System.Drawing.Size(100, 20);
+            this.tb_forpattern.TabIndex = 53;
             // 
             // Form1
             // 
@@ -572,6 +594,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.CheckBox cb_pattern;
+        private System.Windows.Forms.TextBox tb_forpattern;
     }
 }
 

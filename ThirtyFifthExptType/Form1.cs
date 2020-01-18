@@ -47,7 +47,7 @@ namespace ThirtyFifthExptType
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(openFileDialog1.ShowDialog()==DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 pictureBox1.Image = new Bitmap(openFileDialog1.FileName);
                 textBox1.Text = openFileDialog1.FileName;
@@ -57,7 +57,9 @@ namespace ThirtyFifthExptType
             else
             {
                 textBox1.Text = "No picture selected";
+                MessageBox.Show("Nothing", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -157,6 +159,7 @@ namespace ThirtyFifthExptType
                 Cv2.ImWrite(folderBrowserDialog1.SelectedPath + "\\" + i.ToString() + ".bmp", imgInput);
             }
             i++;
+            
         }
         
 
@@ -175,6 +178,9 @@ namespace ThirtyFifthExptType
         {
 
         }
+
+        private void cb_contour_CheckedChanged(object sender, EventArgs e)
+        {}
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -225,9 +231,7 @@ namespace ThirtyFifthExptType
             //PRE_PROCESSORS
             Cv2.CvtColor(tempa, tempa, ColorConversionCodes.BGRA2GRAY);
             if (comboBox1.Text == "None"||comboBox2.Text=="None")
-            {
-                   
-            }
+            {}
 
             if (cb_blur.Checked)
             {
@@ -356,20 +360,28 @@ namespace ThirtyFifthExptType
                 }
             }
 
+            if (cb_pattern.Checked)
+            {
+                templ1 = Cv2.ImRead(@"F:\REDBOT INNOVATIONS\Brakes img\RHS\562\69_1.bmp");
+                Cv2.CvtColor(templ1, templ1, ColorConversionCodes.BGRA2GRAY);
+                Cv2.MatchTemplate(tempa, templ1, result, TemplateMatchModes.CCoeff);
+                Cv2.NamedWindow("a", WindowMode.Normal);
+                Cv2.ImShow("a", result);
+                //if(result)
+                //{
+                //    tb_forpattern.Text = "FOUND";
+                //}
+                //else
+                //{
+                //    tb_forpattern.Text = "NOT FOUND";
+                //}
+            }
 
             Cv2.NamedWindow("s", WindowMode.Normal);
             Cv2.ImShow("s", tempa);
             Bitmap bmp1 = BitmapConverter.ToBitmap(tempa);
             pictureBox2.Image = bmp1;
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-
-
-            templ1 = Cv2.ImRead(@"F:\REDBOT INNOVATIONS\Brakes img\RHS\562\69_1.bmp");
-            int result1_cols = tempa.Cols - templ1.Cols + 1;
-            int result1_rows = tempa.Rows - templ1.Rows + 1;
-            result.Create(result1_cols, result1_rows, MatType.CV_8UC1);
-            Cv2.MatchTemplate(tempa, templ1, result, TemplateMatchModes.CCoeff);
-
 
         }
     }
