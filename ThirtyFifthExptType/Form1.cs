@@ -172,6 +172,10 @@ namespace ThirtyFifthExptType
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {}
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {}
+
         private void textBox4_TextChanged(object sender, EventArgs e)
         {}
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -376,7 +380,7 @@ namespace ThirtyFifthExptType
                 int result1_rows = tempa.Rows - templ1.Rows + 1;
                 //result1.Create(result1_cols, result1_rows, MatType.CV_32FC1);
 
-                Cv2.MatchTemplate(tempa, templ1, result, TemplateMatchModes.CCoeff);
+                Cv2.MatchTemplate(tempa, templ1, result, TemplateMatchModes.CCorrNormed);
                 Cv2.MinMaxLoc(result, out minValue, out maxValue, out minLoc, out maxLoc);
                 matchLoc = maxLoc;
                 min = minValue * 100;
@@ -396,8 +400,7 @@ namespace ThirtyFifthExptType
                 //Cv2.CvtColor(imgInput, imgInput, ColorConversionCodes.GRAY2BGR);
                 Cv2.Rectangle(imgInput, rect2, Scalar.Red, 5);
 
-                Mat roi = new Mat(imgInput, rect2);
-                if (result == templ1)
+                if (max>95)
                 {
                     tb_forpattern.Text = "PASS";
                     tb_forpattern.BackColor = Color.Green;
@@ -415,8 +418,6 @@ namespace ThirtyFifthExptType
             Bitmap bmp1 = BitmapConverter.ToBitmap(imgInput);
             pictureBox2.Image = bmp1;
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            //pictureBox1.Image = bmp1;
-            //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
 
         }
