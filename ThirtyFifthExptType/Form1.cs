@@ -25,10 +25,11 @@ namespace ThirtyFifthExptType
         
         OpenCvSharp.Point LocationXY;
         OpenCvSharp.Point LocationX1Y1;
+        OpenCvSharp.Rect rect2;
         Mat imgInput = new Mat();
         Mat templ1=new Mat();
         Mat result = new Mat();
-        int i = 0;
+        int i = 0, k;
         int tx, ty, th, tw;
         int var_ind = 0;
         int countpixel = 0;
@@ -38,7 +39,13 @@ namespace ThirtyFifthExptType
         int[] Pos_ty = new int[5];
         int[] Pos_tw = new int[5];
         int[] Pos_th = new int[5];
-
+        double minValue;
+        double maxValue;
+        double min, max;
+        private int[,] X, Y, W, H;
+        OpenCvSharp.Point maxLoc;
+        OpenCvSharp.Point minLoc;
+        OpenCvSharp.Point matchLoc, resLoc;
 
         public Form1()
         {
@@ -362,26 +369,55 @@ namespace ThirtyFifthExptType
 
             if (cb_pattern.Checked)
             {
+                Mat result1 = new Mat();
                 templ1 = Cv2.ImRead(@"F:\REDBOT INNOVATIONS\Brakes img\RHS\562\69_1.bmp");
                 Cv2.CvtColor(templ1, templ1, ColorConversionCodes.BGRA2GRAY);
-                Cv2.MatchTemplate(tempa, templ1, result, TemplateMatchModes.CCoeff);
-                Cv2.NamedWindow("a", WindowMode.Normal);
-                Cv2.ImShow("a", result);
-                //if(result)
-                //{
-                //    tb_forpattern.Text = "FOUND";
-                //}
-                //else
-                //{
-                //    tb_forpattern.Text = "NOT FOUND";
-                //}
-            }
+                int result1_cols = tempa.Cols - templ1.Cols + 1;
+                int result1_rows = tempa.Rows - templ1.Rows + 1;
+                //result1.Create(result1_cols, result1_rows, MatType.CV_32FC1);
 
+                Cv2.MatchTemplate(tempa, templ1, result, TemplateMatchModes.CCoeff);
+                Cv2.MinMaxLoc(result, out minValue, out maxValue, out minLoc, out maxLoc);
+                matchLoc = maxLoc;
+                min = minValue * 100;
+                max = maxValue * 100;
+
+                resLoc = new OpenCvSharp.Point(matchLoc.X + templ1.Cols, matchLoc.Y + templ1.Rows);
+                int mxi = Convert.ToInt32(matchLoc.X);
+                int myi = Convert.ToInt32(matchLoc.Y);
+                int rxi = Convert.ToInt32(resLoc.X);
+                int ryi = Convert.ToInt32(resLoc.Y);
+                int wi = rxi - mxi;
+                int hi = ryi - myi;
+                OpenCvSharp.Rect cro = new OpenCvSharp.Rect(mxi, myi, wi, hi);
+                int x = tx + mxi;
+                int y = ty + myi;
+                rect2 = new OpenCvSharp.Rect(x, y, cro.Width, cro.Height);
+                //Cv2.CvtColor(imgInput, imgInput, ColorConversionCodes.GRAY2BGR);
+                Cv2.Rectangle(imgInput, rect2, Scalar.Red, 5);
+
+                Mat roi = new Mat(imgInput, rect2);
+                if (result == templ1)
+                {
+                    tb_forpattern.Text = "PASS";
+                    tb_forpattern.BackColor = Color.Green;
+                }
+                else
+                {
+                    tb_forpattern.Text = "FAIL";
+                    tb_forpattern.BackColor = Color.Red;
+                }
+
+            }
+            
             Cv2.NamedWindow("s", WindowMode.Normal);
-            Cv2.ImShow("s", tempa);
-            Bitmap bmp1 = BitmapConverter.ToBitmap(tempa);
+            Cv2.ImShow("s", imgInput);
+            Bitmap bmp1 = BitmapConverter.ToBitmap(imgInput);
             pictureBox2.Image = bmp1;
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            //pictureBox1.Image = bmp1;
+            //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
 
         }
     }
