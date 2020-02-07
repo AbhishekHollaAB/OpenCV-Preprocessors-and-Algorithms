@@ -33,6 +33,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.btn_rotate = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
@@ -48,6 +50,9 @@
             this.cb_threshold = new System.Windows.Forms.CheckBox();
             this.cb_blur = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cb_close = new System.Windows.Forms.CheckBox();
+            this.cb_hm = new System.Windows.Forms.CheckBox();
+            this.cb_open = new System.Windows.Forms.CheckBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.cb_threinvert = new System.Windows.Forms.CheckBox();
@@ -61,6 +66,13 @@
             this.cb_canny = new System.Windows.Forms.CheckBox();
             this.cb_adaptive = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.score4 = new System.Windows.Forms.TextBox();
+            this.tb_forpattern4 = new System.Windows.Forms.TextBox();
+            this.score3 = new System.Windows.Forms.TextBox();
+            this.score2 = new System.Windows.Forms.TextBox();
+            this.tb_forpattern3 = new System.Windows.Forms.TextBox();
+            this.score1 = new System.Windows.Forms.TextBox();
+            this.tb_forpattern2 = new System.Windows.Forms.TextBox();
             this.tb_forpattern = new System.Windows.Forms.TextBox();
             this.cb_pattern = new System.Windows.Forms.CheckBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -68,6 +80,12 @@
             this.cb_count = new System.Windows.Forms.CheckBox();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.lbl_pass_fail = new System.Windows.Forms.Label();
+            this.btn_left = new System.Windows.Forms.Button();
+            this.cb_colorpixels = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -78,6 +96,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -105,6 +126,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.btn_rotate);
             this.groupBox1.Controls.Add(this.textBox4);
             this.groupBox1.Controls.Add(this.textBox3);
             this.groupBox1.Controls.Add(this.button4);
@@ -116,11 +139,31 @@
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Location = new System.Drawing.Point(21, 601);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(593, 125);
+            this.groupBox1.Size = new System.Drawing.Size(691, 125);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "For Checking";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(487, 21);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(87, 40);
+            this.button5.TabIndex = 10;
+            this.button5.Text = "Draw Rectangles";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // btn_rotate
+            // 
+            this.btn_rotate.Location = new System.Drawing.Point(580, 21);
+            this.btn_rotate.Name = "btn_rotate";
+            this.btn_rotate.Size = new System.Drawing.Size(87, 40);
+            this.btn_rotate.TabIndex = 9;
+            this.btn_rotate.Text = "Draw Circles";
+            this.btn_rotate.UseVisualStyleBackColor = true;
+            this.btn_rotate.Click += new System.EventHandler(this.btn_rotate_Click);
             // 
             // textBox4
             // 
@@ -148,7 +191,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(489, 29);
+            this.button4.Location = new System.Drawing.Point(564, 80);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(87, 27);
             this.button4.TabIndex = 6;
@@ -233,7 +276,7 @@
             this.img_disp.Location = new System.Drawing.Point(983, 25);
             this.img_disp.Margin = new System.Windows.Forms.Padding(2);
             this.img_disp.Name = "img_disp";
-            this.img_disp.Size = new System.Drawing.Size(343, 285);
+            this.img_disp.Size = new System.Drawing.Size(133, 126);
             this.img_disp.TabIndex = 34;
             this.img_disp.TabStop = false;
             this.img_disp.Click += new System.EventHandler(this.img_disp_Click);
@@ -273,6 +316,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cb_colorpixels);
+            this.groupBox2.Controls.Add(this.cb_close);
+            this.groupBox2.Controls.Add(this.cb_hm);
+            this.groupBox2.Controls.Add(this.cb_open);
             this.groupBox2.Controls.Add(this.cb_threshold);
             this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.numericUpDown4);
@@ -289,11 +336,41 @@
             this.groupBox2.Controls.Add(this.cb_blur);
             this.groupBox2.Location = new System.Drawing.Point(738, 16);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(190, 244);
+            this.groupBox2.Size = new System.Drawing.Size(190, 305);
             this.groupBox2.TabIndex = 38;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Pre-Processors";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // cb_close
+            // 
+            this.cb_close.AutoSize = true;
+            this.cb_close.Location = new System.Drawing.Point(7, 267);
+            this.cb_close.Name = "cb_close";
+            this.cb_close.Size = new System.Drawing.Size(53, 19);
+            this.cb_close.TabIndex = 52;
+            this.cb_close.Text = "Close";
+            this.cb_close.UseVisualStyleBackColor = true;
+            // 
+            // cb_hm
+            // 
+            this.cb_hm.AutoSize = true;
+            this.cb_hm.Location = new System.Drawing.Point(7, 249);
+            this.cb_hm.Name = "cb_hm";
+            this.cb_hm.Size = new System.Drawing.Size(83, 19);
+            this.cb_hm.TabIndex = 51;
+            this.cb_hm.Text = "Hit or Miss";
+            this.cb_hm.UseVisualStyleBackColor = true;
+            // 
+            // cb_open
+            // 
+            this.cb_open.AutoSize = true;
+            this.cb_open.Location = new System.Drawing.Point(7, 233);
+            this.cb_open.Name = "cb_open";
+            this.cb_open.Size = new System.Drawing.Size(53, 19);
+            this.cb_open.TabIndex = 50;
+            this.cb_open.Text = "Open";
+            this.cb_open.UseVisualStyleBackColor = true;
             // 
             // comboBox1
             // 
@@ -308,6 +385,9 @@
             "Dilate",
             "Threshold Otsu",
             "Threshold Invert",
+            "Open",
+            "Hit or Miss",
+            "Close",
             "None"});
             this.comboBox1.Location = new System.Drawing.Point(7, 21);
             this.comboBox1.Name = "comboBox1";
@@ -435,24 +515,88 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.score4);
+            this.groupBox3.Controls.Add(this.tb_forpattern4);
+            this.groupBox3.Controls.Add(this.score3);
+            this.groupBox3.Controls.Add(this.score2);
+            this.groupBox3.Controls.Add(this.tb_forpattern3);
+            this.groupBox3.Controls.Add(this.score1);
+            this.groupBox3.Controls.Add(this.tb_forpattern2);
             this.groupBox3.Controls.Add(this.tb_forpattern);
             this.groupBox3.Controls.Add(this.cb_pattern);
             this.groupBox3.Controls.Add(this.comboBox2);
             this.groupBox3.Controls.Add(this.cb_contour);
             this.groupBox3.Controls.Add(this.cb_count);
-            this.groupBox3.Location = new System.Drawing.Point(738, 275);
+            this.groupBox3.Location = new System.Drawing.Point(738, 327);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(190, 131);
+            this.groupBox3.Size = new System.Drawing.Size(190, 218);
             this.groupBox3.TabIndex = 39;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Algorithms";
             // 
+            // score4
+            // 
+            this.score4.Location = new System.Drawing.Point(30, 191);
+            this.score4.MaxLength = 6;
+            this.score4.Name = "score4";
+            this.score4.Size = new System.Drawing.Size(154, 21);
+            this.score4.TabIndex = 47;
+            // 
+            // tb_forpattern4
+            // 
+            this.tb_forpattern4.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_forpattern4.Location = new System.Drawing.Point(4, 190);
+            this.tb_forpattern4.Name = "tb_forpattern4";
+            this.tb_forpattern4.Size = new System.Drawing.Size(22, 22);
+            this.tb_forpattern4.TabIndex = 56;
+            // 
+            // score3
+            // 
+            this.score3.Location = new System.Drawing.Point(30, 164);
+            this.score3.MaxLength = 6;
+            this.score3.Name = "score3";
+            this.score3.Size = new System.Drawing.Size(154, 21);
+            this.score3.TabIndex = 46;
+            // 
+            // score2
+            // 
+            this.score2.Location = new System.Drawing.Point(30, 135);
+            this.score2.MaxLength = 6;
+            this.score2.Name = "score2";
+            this.score2.Size = new System.Drawing.Size(154, 21);
+            this.score2.TabIndex = 45;
+            // 
+            // tb_forpattern3
+            // 
+            this.tb_forpattern3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_forpattern3.Location = new System.Drawing.Point(4, 163);
+            this.tb_forpattern3.Name = "tb_forpattern3";
+            this.tb_forpattern3.Size = new System.Drawing.Size(21, 22);
+            this.tb_forpattern3.TabIndex = 55;
+            // 
+            // score1
+            // 
+            this.score1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.score1.Location = new System.Drawing.Point(30, 107);
+            this.score1.MaxLength = 6;
+            this.score1.Name = "score1";
+            this.score1.Size = new System.Drawing.Size(154, 21);
+            this.score1.TabIndex = 44;
+            // 
+            // tb_forpattern2
+            // 
+            this.tb_forpattern2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_forpattern2.Location = new System.Drawing.Point(3, 135);
+            this.tb_forpattern2.Name = "tb_forpattern2";
+            this.tb_forpattern2.Size = new System.Drawing.Size(22, 22);
+            this.tb_forpattern2.TabIndex = 54;
+            // 
             // tb_forpattern
             // 
             this.tb_forpattern.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_forpattern.Location = new System.Drawing.Point(69, 99);
+            this.tb_forpattern.Location = new System.Drawing.Point(3, 107);
             this.tb_forpattern.Name = "tb_forpattern";
-            this.tb_forpattern.Size = new System.Drawing.Size(116, 22);
+            this.tb_forpattern.Size = new System.Drawing.Size(21, 22);
             this.tb_forpattern.TabIndex = 53;
             // 
             // cb_pattern
@@ -508,11 +652,77 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.pictureBox3.Location = new System.Drawing.Point(1204, 25);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(133, 126);
+            this.pictureBox3.TabIndex = 40;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.pictureBox4.Location = new System.Drawing.Point(983, 181);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(133, 126);
+            this.pictureBox4.TabIndex = 41;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.pictureBox5.Location = new System.Drawing.Point(1204, 181);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(133, 126);
+            this.pictureBox5.TabIndex = 42;
+            this.pictureBox5.TabStop = false;
+            // 
+            // lbl_pass_fail
+            // 
+            this.lbl_pass_fail.AutoSize = true;
+            this.lbl_pass_fail.BackColor = System.Drawing.Color.LawnGreen;
+            this.lbl_pass_fail.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_pass_fail.Location = new System.Drawing.Point(788, 560);
+            this.lbl_pass_fail.Name = "lbl_pass_fail";
+            this.lbl_pass_fail.Size = new System.Drawing.Size(88, 36);
+            this.lbl_pass_fail.TabIndex = 43;
+            this.lbl_pass_fail.Text = "PASS";
+            // 
+            // btn_left
+            // 
+            this.btn_left.Location = new System.Drawing.Point(728, 631);
+            this.btn_left.Name = "btn_left";
+            this.btn_left.Size = new System.Drawing.Size(75, 23);
+            this.btn_left.TabIndex = 45;
+            this.btn_left.Text = "left";
+            this.btn_left.UseVisualStyleBackColor = true;
+            this.btn_left.Click += new System.EventHandler(this.btn_left_Click);
+            // 
+            // cb_colorpixels
+            // 
+            this.cb_colorpixels.AutoSize = true;
+            this.cb_colorpixels.Location = new System.Drawing.Point(7, 287);
+            this.cb_colorpixels.Name = "cb_colorpixels";
+            this.cb_colorpixels.Size = new System.Drawing.Size(84, 19);
+            this.cb_colorpixels.TabIndex = 53;
+            this.cb_colorpixels.Text = "Color Pixels";
+            this.cb_colorpixels.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.btn_left);
+            this.Controls.Add(this.pictureBox5);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.lbl_pass_fail);
+            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.pictureBox2);
@@ -542,7 +752,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -587,6 +801,24 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.CheckBox cb_pattern;
         private System.Windows.Forms.TextBox tb_forpattern;
+        private System.Windows.Forms.CheckBox cb_open;
+        private System.Windows.Forms.CheckBox cb_hm;
+        private System.Windows.Forms.CheckBox cb_close;
+        private System.Windows.Forms.Button btn_rotate;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.TextBox tb_forpattern4;
+        private System.Windows.Forms.TextBox tb_forpattern3;
+        private System.Windows.Forms.TextBox tb_forpattern2;
+        private System.Windows.Forms.Label lbl_pass_fail;
+        private System.Windows.Forms.TextBox score1;
+        private System.Windows.Forms.TextBox score2;
+        private System.Windows.Forms.TextBox score3;
+        private System.Windows.Forms.TextBox score4;
+        private System.Windows.Forms.Button btn_left;
+        private System.Windows.Forms.CheckBox cb_colorpixels;
     }
 }
 
